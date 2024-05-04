@@ -7,9 +7,9 @@ export default function ThemeToggler() {
     const { theme, setTheme } = useTheme();
 
     return (
-        <button className="text-3xl" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+        <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
             {
-                theme === "dark" ? <GiMidnightClaw /> : <PiSun />
+                theme === "dark" ? <GiMidnightClaw size={30} /> : <PiSun size={30} />
             }
         </button>
     )
