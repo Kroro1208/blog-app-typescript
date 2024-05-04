@@ -5,6 +5,9 @@ import { MenuItem } from "@/app/utils/types";
 import { Sarpanch } from "next/font/google";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Button from "../Button/button";
+import { ThemeProvider } from "next-themes";
+import ThemeToggler from "../theme/theme";
 
 export default function Header() {
     const [sticky, setSticky] = useState<boolean>(false);
@@ -80,6 +83,13 @@ export default function Header() {
                                     ))}
                                 </ul>
                             </nav>
+                        </div>
+                        <div className="flex gap-4 items-center justify-end pr-16 lg:pr-0">
+                            <Button onClick={() => { }} text="Create" />
+                            <Button onClick={() => { }} text="Login" />
+                            <div className="flex gap-3 items-center">
+                                <ThemeToggler />
+                            </div>
                         </div>
                     </div>
                 </div>
