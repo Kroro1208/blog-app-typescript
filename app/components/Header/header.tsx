@@ -23,6 +23,7 @@ export default function Header() {
         window.addEventListener('scroll', handleStickyNavBar)
     })
 
+    // stickyがtrueの場合、ヘッダーを固定して背景が白く半透明になり、ぼかしエフェクトが適用される
     return (
         <header className={`top-0 left-0 z-40 flex w-full items-center bg-transparent
         ${sticky ? '!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky background:blur-sm !transition dark:!bg-primary dark:!bg-opacity-20'
