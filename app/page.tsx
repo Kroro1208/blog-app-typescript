@@ -1,5 +1,5 @@
 export default function Home() {
   return (
-    <div className="text-xl">メインページだよ</div>
+    <div>HomePage</div>
   );
 }
