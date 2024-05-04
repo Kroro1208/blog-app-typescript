@@ -2,11 +2,9 @@
 
 import { menuItems } from "@/app/utils/menuItems";
 import { MenuItem } from "@/app/utils/types";
-import { Sarpanch } from "next/font/google";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "../Button/button";
-import { ThemeProvider } from "next-themes";
 import ThemeToggler from "../theme/theme";
 
 export default function Header() {
@@ -68,10 +66,10 @@ export default function Header() {
                             </button>
                             <nav
                                 id="navbarCollapse"
-                                className={`absolute right-0 z-30 w-[250px] rounded border-[0.5px] bg-white border-body-color/50 py-4 px-6 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100
+                                className={`absolute right-0 z-30 w-[250px] rounded border-[0.5px] bg-white border-body-color/50
+                                py-4 px-6 duration-300 dark:border-body-color/20 dark:bg-dark lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100
                                 ${navbarOpen ? 'visible top-full opacity-100' : "invisible top-[120%] opacity-0"}
-                                `}
-                            >
+                                `} >
                                 <ul className="block lg:flex lg:space-x-12">
                                     {menuItems.map((item: MenuItem) => (
                                         <li key={item.id} className="group relative">
