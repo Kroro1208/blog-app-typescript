@@ -1,16 +1,18 @@
 "use client";
 
-import { menuItems } from "@/app/utils/menuItems";
+import { menuItems } from "@/app/utils/data";
 import { MenuItem } from "@/app/utils/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "../Button/button";
 import ThemeToggler from "../theme/theme";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
     const [sticky, setSticky] = useState<boolean>(false);
     const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
+    const router = useRouter();
     const { data: session } = useSession();
     console.log(session, "session");
 
@@ -87,7 +89,7 @@ export default function Header() {
                         </div>
                         <div className="flex gap-4 items-center justify-end pr-16 lg:pr-0">
                             {
-                                session !== null ? <Button onClick={() => { }} text="Create" /> : null
+                                session !== null ? <Button onClick={() => router.push('/create')} text="Create" /> : null
                             }
                             <Button onClick={session !== null ? () => signOut() : () => signIn("github")} text={session !== null ? "Logout" : "Login"} />
                             <div className="flex gap-3 items-center">
