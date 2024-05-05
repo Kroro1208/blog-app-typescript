@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "../Button/button";
 import ThemeToggler from "../theme/theme";
+import { signIn, signOut } from "next-auth/react";
 
 export default function Header() {
     const [sticky, setSticky] = useState<boolean>(false);
@@ -84,7 +85,7 @@ export default function Header() {
                         </div>
                         <div className="flex gap-4 items-center justify-end pr-16 lg:pr-0">
                             <Button onClick={() => { }} text="Create" />
-                            <Button onClick={() => { }} text="Login" />
+                            <Button onClick={() => signIn()} text="Login" />
                             <div className="flex gap-3 items-center">
                                 <ThemeToggler />
                             </div>
