@@ -8,6 +8,7 @@ import Button from "../Button/button";
 import ThemeToggler from "../theme/theme";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Header() {
     const [sticky, setSticky] = useState<boolean>(false);
@@ -38,11 +39,12 @@ export default function Header() {
         `}>
             <div className="container">
                 <div className="relative -mx-4 flex items-center justify-between">
+                    <Image src={"icon1.svg"} height={100} width={100} alt="logo" className="hidden md:flex justify-between md:p-5 ml-5" />
                     <div className="w-60 max-w-full px-4 xl:mr-12">
                         <Link href={'/'} className={`text-[30px] font-extrabold cursor-pointer block w-full
                             ${sticky ? "py-5 lg:py-2" : "py-8"}
                         `}>
-                            NextBlog
+                            Next Blog
                         </Link>
                     </div>
                     <div className="flex w-full items-center justify-between px-4">

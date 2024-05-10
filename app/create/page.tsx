@@ -1,5 +1,7 @@
 "use client"
 
+import { formInput } from "../utils/data";
+
 export default function Create() {
     return (
         <section className="overflow-hidden py-16 md:py-20 lg:py-28">
@@ -23,7 +25,40 @@ export default function Create() {
                                         />
                                     </div>
                                     <div className="-mx-4 flex flex-wrap">
-                                        
+                                        {formInput.map((item) => (
+                                            <div className="w-full px-4">
+                                                <label className="mb-3 block text-sm font-bold text-dark dark:text-white">
+                                                    {item.label}
+                                                </label>
+                                                {
+                                                    item.component === "input" ? (
+                                                        <input type={item.type} name={item.id} placeholder={item.placeholder}
+                                                            className="w-full mb-8 rounded-xl border-transparent py-3 px-6 text-base
+                                                        text-body-color placeholder-body-color shadow-one outline-none
+                                                        focus:border-primary focus-visible:shadow-none dark:bg-[#41476f] dark:shadow-signUp"/>
+                                                    ) :
+                                                    item.component === "textarea" ? (
+                                                        <textarea placeholder={item.placeholder} name={item.id} rows={5} className="w-full resize-none rounded-md border border-transparent py-3 px-6 text-base
+                                                        text-body-color placeholder-body-color shadow-one outline-none
+                                                        focus:border-primary focus-visible:shadow-none dark:bg-[#41476f] dark:shadow-signUp"/>
+                                                    ) :
+                                                    item.component === "select" ? (
+                                                        <select name={item.id}  className="w-full mb-8 rounded-xl border-transparent py-3 px-6 text-base
+                                                        text-body-color placeholder-body-color shadow-one outline-none
+                                                        focus:border-primary focus-visible:shadow-none dark:bg-[#41476f] dark:shadow-signUp">
+                                                            <option value={""} id="">Select</option>
+                                                            {
+                                                                item.options.map((itemOption) => (
+                                                                <option id-={itemOption.value} value={itemOption.value}>
+                                                                    {itemOption.label}
+                                                                </option>
+                                                                ))
+                                                            }
+                                                        </select>
+                                                    ) : null
+                                                }
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
