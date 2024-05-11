@@ -81,3 +81,12 @@ export const initialBlogFormData = {
     category: ''
 }
 
+export const firebaseConfig = {
+    apiKey: "AIzaSyCoUPlmoD0psOb_dJ_iIo7wwWjgFSidjR0",
+    authDomain: "nextjs-blog-typescript-491fd.firebaseapp.com",
+    projectId: "nextjs-blog-typescript-491fd",
+    storageBucket: "nextjs-blog-typescript-491fd.appspot.com",
+    messagingSenderId: "276672920159",
+    appId: "1:276672920159:web:6e32c82ffd84a2a49df9ea",
+    measurementId: "G-KSS030T6N6"
+};

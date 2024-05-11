@@ -1,5 +1,6 @@
 "use client"
 
+import Button from "../components/Button/button";
 import { formInput } from "../utils/data";
 
 export default function Create() {
@@ -13,7 +14,7 @@ export default function Create() {
                                 ブログ記事を作成する
                             </h2>
                             <div>
-                                <div className="flex gap-3">
+                                <div className="flex flex-col gap-3">
                                     <div>
                                         <label className="mb-3 text-sm block font-medium text-dark dark:text-white">
                                             画像をアップロードする
@@ -55,10 +56,12 @@ export default function Create() {
                                                                 ))
                                                             }
                                                         </select>
-                                                    ) : null
-                                                }
+                                                    ) : null }
                                             </div>
                                         ))}
+                                        <div className="w-full px-5">
+                                            <Button text="ブログを投稿" onClick={() => {}}/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
