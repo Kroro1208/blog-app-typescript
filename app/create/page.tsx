@@ -8,6 +8,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/
 import Spinner from "../components/Spinner/spinner";
 import { GlobalContext } from "../context/loading";
 import { BlogFormData } from "../utils/types";
+import { useSession } from "next-auth/react";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, "gs://nextjs-blog-typescript-491fd.appspot.com");
@@ -35,6 +36,8 @@ async function handleImageSaveToFirebase(file: any) {
 export default function Create() {
     const { formData, setFormData } = useContext(GlobalContext);
     const [imageLoading, setImageLoading] = useState<boolean>(false);
+    const { data: session } = useSession();
+
     async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) return;
         setImageLoading(true);
@@ -51,6 +54,20 @@ export default function Create() {
 
     async function handleSavePost() {
         console.log(formData);
+        const res = await fetch('/api/blog-post/add-post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...formData,
+                userid: session?.user?.name,
+                userimage: session?.user?.image,
+                comments: []
+            })
+        });
+        const data = await res.json();
+        console.log(data);
     }
 
     return (

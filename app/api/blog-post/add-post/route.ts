@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const extractPostData = await request.json();
+    const newlyCreatePost = await 
     console.log(extractPostData);
   } catch (error) {
     console.log(error);
