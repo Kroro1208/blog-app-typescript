@@ -103,7 +103,7 @@ export default function Create() {
                                                                 placeholder={item.placeholder}
                                                                 name={item.id} rows={5}
                                                                 value={formData[item.id as keyof BlogFormData]}
-                                                                className="w-full resize-none rounded-md border border-transparent py-3 px-6 text-base
+                                                                className="w-full resize-none rounded-xl border border-transparent py-3 px-6 text-base
                                                                         text-body-color placeholder-body-color shadow-one outline-none
                                                                         focus:border-primary focus-visible:shadow-none dark:bg-[#41476f] dark:shadow-signUp"
                                                                 onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
