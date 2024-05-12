@@ -48,6 +48,11 @@ export default function Create() {
             });
         }
     }
+
+    async function handleSavePost() {
+        console.log(formData);
+    }
+
     return (
         <section className="overflow-hidden py-16 md:py-20 lg:py-28">
             <div className="container">
@@ -141,7 +146,7 @@ export default function Create() {
                                             </div>
                                         ))}
                                         <div className="w-full px-5">
-                                            <Button text="ブログを投稿" onClick={() => { }} />
+                                            <Button text="ブログを投稿" onClick={handleSavePost} />
                                         </div>
                                     </div>
                                 </div>
