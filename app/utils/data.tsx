@@ -82,11 +82,11 @@ export const initialBlogFormData = {
 }
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyCoUPlmoD0psOb_dJ_iIo7wwWjgFSidjR0",
-    authDomain: "nextjs-blog-typescript-491fd.firebaseapp.com",
-    projectId: "nextjs-blog-typescript-491fd",
-    storageBucket: "nextjs-blog-typescript-491fd.appspot.com",
-    messagingSenderId: "276672920159",
-    appId: "1:276672920159:web:6e32c82ffd84a2a49df9ea",
-    measurementId: "G-KSS030T6N6"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
