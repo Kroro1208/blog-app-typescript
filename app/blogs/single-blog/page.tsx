@@ -7,7 +7,7 @@ const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
     return (
         <div>
             <div className="relative overflow-hidden rounded-md bg-white shadow-one dark:bg-dark">
-                <Link href={"/"}>
+                <Link href={"/"} className="relative block h-[250px] w-full">
                     <span className="absolute top-6 z-20 inline-flex items-center justify-center
                     rounded-full bg-primary py-2 px-4 font-semibold capitalize text-white">
                         {category}
@@ -24,14 +24,14 @@ const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
                         {title}
                     </Link>
                 </h3>
-                <p className="h-[100px] text-ellipsis overflow-hidden whitespace-nowrap mb-6 pb-6
+                <p className="h-[50px] text-ellipsis overflow-hidden whitespace-nowrap mb-6 pb-6
                     text-base text-body-color dark:border-white dark:border-opacity-10">
                     {description}
                 </p>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center xl:mr-3 xl:pr-3 2xl:mr-5 sxl:pr-5">
                         <div className="mr-4">
-                            <div className="h-10 w-10 overflow-hidden rounded-full">
+                            <div className="relative h-10 w-10 overflow-hidden rounded-full">
                                 <Image alt="Author" fill src={userimage} />
                             </div>
                         </div>
