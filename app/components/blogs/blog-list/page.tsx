@@ -1,5 +1,6 @@
 "use client"
 
+import SingleBlog from "@/app/blogs/signle-blog/page"
 import { Blog } from "@/app/utils/types"
 
 export default function BlogLists({ lists }: { lists: Blog[] }) {
@@ -10,7 +11,7 @@ export default function BlogLists({ lists }: { lists: Blog[] }) {
                     {
                         lists && lists.length ? lists.map((listItem: Blog) =>
                             <div className="px-4" key={listItem.id}>
-                                
+                                <SingleBlog />
                             </div>) : null
                     }
                 </div>

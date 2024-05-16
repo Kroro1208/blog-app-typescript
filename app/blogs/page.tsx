@@ -1,3 +1,5 @@
+// ブログ一覧ページ取得API
+import BlogLists from "../components/blogs/blog-list/page";
 
 async function extractAllBlogs() {
     const res = await fetch(`${process.env.URL}/api/blog-post/get-all-post`, {
@@ -10,5 +12,6 @@ async function extractAllBlogs() {
 
 export default async function Blogs() {
     const blogPostList = await extractAllBlogs();
-    return <div>{blogPostList}</div>
+
+    return <BlogLists lists={blogPostList} />
 }
