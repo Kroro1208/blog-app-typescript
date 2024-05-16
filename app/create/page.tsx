@@ -9,6 +9,7 @@ import Spinner from "../components/Spinner/spinner";
 import { GlobalContext } from "../context/loading";
 import { BlogFormData } from "../utils/types";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, "gs://nextjs-blog-typescript-491fd.appspot.com");
@@ -37,6 +38,7 @@ export default function Create() {
     const { formData, setFormData } = useContext(GlobalContext);
     const [imageLoading, setImageLoading] = useState<boolean>(false);
     const { data: session } = useSession();
+    const router = useRouter();
 
     async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) return;
@@ -67,6 +69,10 @@ export default function Create() {
             })
         });
         const data = await res.json();
+
+        if (data && data.success) {
+            router.push('/blogs');
+        }
         console.log(data);
     }
 
