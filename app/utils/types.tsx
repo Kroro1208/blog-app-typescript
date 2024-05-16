@@ -30,8 +30,8 @@ export interface Blog {
     title: string;
     description: string;
     category: string;
-    userId: string;
-    userImage: string;
+    userid: string;
+    userimage: string;
     comments: string[];
     image: string;
 }

@@ -10,6 +10,8 @@ export default function BlogLists({ lists }: { lists: Blog[] }) {
         router.refresh();
     }, []);
 
+    console.log('lists:', lists);
+
     return (
         <section className="pt-[120px] pb-[120px]">
             <div className="container">
