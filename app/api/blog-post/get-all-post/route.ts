@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     } else {
       return NextResponse.json({
         success: false,
-        messae: "ブログの投稿に失敗しました",
+        message: "ブログの投稿に失敗しました",
       });
     }
   } catch (error) {
