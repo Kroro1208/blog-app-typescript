@@ -3,19 +3,23 @@
 import { menuItems } from "@/app/utils/data";
 import { MenuItem } from "@/app/utils/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../Button/button";
 import ThemeToggler from "../theme/theme";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { GlobalContext } from "@/app/context/loading";
 
 export default function Header() {
     const [sticky, setSticky] = useState<boolean>(false);
     const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
     const router = useRouter();
+    const { setSearchBlog } = useContext(GlobalContext);
     const { data: session } = useSession();
     console.log(session, "session");
+
+    const pathName = usePathname();
 
     function handleStickyNavBar() {
         if (window.scrollY >= 80) setSticky(true);
@@ -27,8 +31,13 @@ export default function Header() {
     }
 
     useEffect(() => {
-        window.addEventListener('scroll', handleStickyNavBar)
-    })
+        window.addEventListener('scroll', handleStickyNavBar);
+    });
+
+    // 検索後、別ページを表示してから戻ってきたときに検索結果をクリアにする処理
+    useEffect(() => {
+        setSearchBlog([]);
+    }, [pathName]);
 
     // stickyがtrueの場合、ヘッダーを固定して背景が白く半透明になり、ぼかしエフェクトが適用される
     return (
