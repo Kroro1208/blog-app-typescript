@@ -1,13 +1,16 @@
 import { Blog } from "@/app/utils/types"
+import { useSession } from "next-auth/react";
 import Image from "next/image"
 import Link from "next/link"
+import { FaTrash } from "react-icons/fa";
 
 const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
     const { image, category, title, description, userImage, userId } = blogItem;
+    const { data: session } = useSession();
     return (
         <div>
             <div className="relative overflow-hidden rounded-md bg-white shadow-one dark:bg-dark">
-                <Link href={"/"} className="relative block h-[250px] w-full">
+                <Link href={"/"} className="relative block h-[250px] w-full p-3">
                     <span className="absolute top-6 z-20 inline-flex items-center justify-center
                     rounded-full bg-primary py-2 px-4 font-semibold capitalize text-white">
                         {category}
@@ -35,13 +38,19 @@ const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
                                 <Image alt="Author" fill src={userImage} />
                             </div>
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex gap-2">
                             <p className="mb-1 text-sm font-medium text-dark dark:text-white">
                                 By
                             </p>
-                            <p className="mb-1 text-sm font-medium text-dark dark:text-white">
+                            <p className="mb-1 text-md font-medium text-dark dark:text-white">
                                 {userId.split('_')[0].toUpperCase()}
                             </p>
+                        </div>
+                        <div>
+                            {
+                                session != null && session?.user?.name === userId ?
+                                    <FaTrash size={35} className="cursor-pointer pl-4" /> : null
+                            }
                         </div>
                     </div>
                 </div>
