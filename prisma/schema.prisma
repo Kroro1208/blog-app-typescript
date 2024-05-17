@@ -19,7 +19,7 @@ model Post {
   description String
   image String
   category String
-  userid String
-  userimage String
+  userId String
+  userImage String
   comments String[]
 }

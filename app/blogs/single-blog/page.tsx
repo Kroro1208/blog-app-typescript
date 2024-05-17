@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
-    const { image, category, title, description, userimage, userid } = blogItem;
+    const { image, category, title, description, userImage, userId } = blogItem;
     return (
         <div>
             <div className="relative overflow-hidden rounded-md bg-white shadow-one dark:bg-dark">
@@ -32,7 +32,7 @@ const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
                     <div className="flex items-center xl:mr-3 xl:pr-3 2xl:mr-5 sxl:pr-5">
                         <div className="mr-4">
                             <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                                <Image alt="Author" fill src={userimage} />
+                                <Image alt="Author" fill src={userImage} />
                             </div>
                         </div>
                         <div className="flex flex-col">
@@ -40,7 +40,7 @@ const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
                                 By
                             </p>
                             <p className="mb-1 text-sm font-medium text-dark dark:text-white">
-                                {userid.split('_')[0].toUpperCase()}
+                                {userId.split('_')[0].toUpperCase()}
                             </p>
                         </div>
                     </div>

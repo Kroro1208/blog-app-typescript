@@ -5,8 +5,8 @@ CREATE TABLE "Post" (
     "description" TEXT NOT NULL,
     "image" TEXT NOT NULL,
     "category" TEXT NOT NULL,
-    "userid" TEXT NOT NULL,
-    "userimage" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "userImage" TEXT NOT NULL,
     "comments" TEXT[],
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("id")

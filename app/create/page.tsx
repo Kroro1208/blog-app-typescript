@@ -63,8 +63,8 @@ export default function Create() {
             },
             body: JSON.stringify({
                 ...formData,
-                userid: session?.user?.name,
-                userimage: session?.user?.image,
+                userId: session?.user?.name,
+                userImage: session?.user?.image,
                 comments: []
             })
         });
