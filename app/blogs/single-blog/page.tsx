@@ -4,8 +4,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { FaTrash } from "react-icons/fa";
 
-const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
-    const { image, category, title, description, userImage, userId } = blogItem;
+const SingleBlog = ({ blogItem, handleDelete }: { blogItem: Blog, handleDelete: (id: number) => {} }) => {
+    const { image, category, title, description, userImage, userId, id } = blogItem;
     const { data: session } = useSession();
     return (
         <div>
@@ -49,7 +49,7 @@ const SingleBlog = ({ blogItem }: { blogItem: Blog }) => {
                         <div>
                             {
                                 session != null && session?.user?.name === userId ?
-                                    <FaTrash size={35} className="cursor-pointer pl-4" /> : null
+                                    <FaTrash size={35} className="cursor-pointer pl-4" onClick={() => handleDelete(id)} /> : null
                             }
                         </div>
                     </div>

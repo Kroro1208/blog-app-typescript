@@ -5,13 +5,14 @@ import Button from "../components/Button/button"
 import { GlobalContext } from "../context/loading"
 import { Blog } from "../utils/types";
 import SingleBlog from "../blogs/single-blog/page";
+import { useRouter } from "next/navigation";
 
 export default function Search() {
     const { searchQuery, setSearchQuery, searchBlog, setSearchBlog } = useContext(GlobalContext);
+    const router = useRouter();
 
-    async function handleSearch() {
-        console.log(searchQuery);
-        const res = await fetch(`/api/search?query=${searchQuery}`, {
+    async function fetchSearchBlog(query: string) {
+        const res = await fetch(`/api/search?query=${query}`, {
             method: 'GET',
             cache: 'no-store'
         });
@@ -19,9 +20,24 @@ export default function Search() {
         const data = await res.json();
         console.log(data, '検索データ')
         if (data.success) {
-            setSearchQuery('');
             setSearchBlog(data.data);
         }
+    }
+
+    async function handleSearch() {
+        fetchSearchBlog(searchQuery);
+    }
+
+
+    async function handleDelete(id: number) {
+        console.log(id);
+        const res = await fetch(`/api/blog-post/delete-post?id=${id}`, {
+            method: "DELETE",
+            cache: "no-store"
+        });
+
+        const data = await res.json();
+        if (data && data.success) fetchSearchBlog(searchQuery);
     }
 
     return (
@@ -60,7 +76,7 @@ export default function Search() {
                                     (searchBlog && searchBlog.length) ? searchBlog.map((item: Blog) => {
                                         return (
                                             <div key={item.id} className="w-full px-4 md-w-2/3 lg:w-1/2 xl:w-1/3">
-                                                <SingleBlog blogItem={item} />
+                                                <SingleBlog handleDelete={handleDelete} blogItem={item} />
                                             </div>
                                         )
                                     }) : <h1>検索結果がありませんでした</h1>

@@ -12,6 +12,17 @@ export default function BlogLists({ lists }: { lists: Blog[] }) {
 
     console.log('lists:', lists);
 
+    async function handleDelete(id: number) {
+        console.log(id);
+        const res = await fetch(`/api/blog-post/delete-post?id=${id}`, {
+            method: "DELETE",
+            cache: "no-store"
+        });
+
+        const data = await res.json();
+        if (data && data.success) router.refresh();
+    }
+
     return (
         <section className="pt-[120px] pb-[120px]">
             <div className="container">
@@ -19,7 +30,7 @@ export default function BlogLists({ lists }: { lists: Blog[] }) {
                     {
                         (lists && lists.length) ? lists.map((listItem: Blog) => (
                             <div className="px-4" key={listItem.id}>
-                                <SingleBlog blogItem={listItem} />
+                                <SingleBlog blogItem={listItem} handleDelete={handleDelete} />
                             </div>))
                             : null
                     }

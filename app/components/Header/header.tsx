@@ -15,7 +15,7 @@ export default function Header() {
     const [sticky, setSticky] = useState<boolean>(false);
     const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
     const router = useRouter();
-    const { setSearchBlog } = useContext(GlobalContext);
+    const { setSearchBlog, setSearchQuery } = useContext(GlobalContext);
     const { data: session } = useSession();
     console.log(session, "session");
 
@@ -37,6 +37,7 @@ export default function Header() {
     // 検索後、別ページを表示してから戻ってきたときに検索結果をクリアにする処理
     useEffect(() => {
         setSearchBlog([]);
+        setSearchQuery('');
     }, [pathName]);
 
     // stickyがtrueの場合、ヘッダーを固定して背景が白く半透明になり、ぼかしエフェクトが適用される
