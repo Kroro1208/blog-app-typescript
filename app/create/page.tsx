@@ -2,7 +2,7 @@
 
 import { useContext, useState } from "react";
 import Button from "../components/Button/button";
-import { firebaseConfig, formInput } from "../utils/data";
+import { firebaseConfig, formInput, initialBlogFormData } from "../utils/data";
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import Spinner from "../components/Spinner/spinner";
@@ -71,6 +71,7 @@ export default function Create() {
         const data = await res.json();
 
         if (data && data.success) {
+            setFormData(initialBlogFormData);
             router.push('/blogs');
         }
         console.log(data);
