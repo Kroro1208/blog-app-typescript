@@ -1,23 +1,25 @@
 import CategoryList from "@/app/components/category";
+import { Blog } from "@/app/utils/types";
 
-async function getAllCategories(getId: string) {
-    const res = await fetch(`${process.env.URL}/api/category?categoryID=${getId}`, {
+async function getCategoryBlogsById(categoryId: string): Promise<Blog[]> {
+    const res = await fetch(`${process.env.URL}/api/category?categoryID=${categoryId}`, {
         method: "GET",
         cache: "no-store"
     });
 
     const data = await res.json();
     if (data.success) return data.data;
+    return [];
 }
 
-const CategoryPage = async ({ params }: { params: any }) => {
+const CategoryPage = async ({ params }: { params: { id: string } }) => {
     const { id } = params;
-    const getAllList = await getAllCategories(id);
+    const categoryBlogs = await getCategoryBlogsById(id);
     return (
         <div>
-            <CategoryList list={getAllList} />
+            <CategoryList list={categoryBlogs} />
         </div>
-    )
+    );
 }
 
-export default CategoryPage
+export default CategoryPage;
