@@ -28,9 +28,11 @@ export default function CategoryList({ list }: { list: Blog[] }) {
                                     <Button text="ブログを作成する" onClick={() => router.push('/create')} />
                                 </div>) :
                                 (<div>
-                                    <h2 className="mb-8 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">
-                                        {getLatestBlogCategory?.title}
-                                    </h2>
+                                    <Link href={`/blogs/${getLatestBlogCategory?.id}`}>
+                                        <h2 className="mb-8 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">
+                                            {getLatestBlogCategory?.title}
+                                        </h2>
+                                    </Link>
                                     <div className="mb-10 w-full overflow-hidden rounded">
                                         <div className="relative aspect-[97/60] w-full sm:aspect-[97/44]">
                                             <Image src={getLatestBlogCategory?.image || ""} alt="Blog" fill
