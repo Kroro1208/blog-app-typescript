@@ -63,7 +63,9 @@ const BlogDetailsHome = ({ blogData }: { blogData: Blog }) => {
                      placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none
                       dark:bg-[#242B51] dark:shadow-signUp"
                         />
-                        <button className="border border-body-color hover:shadow-signUp hover:bg-body-color rounded-lg py-3 px-4">
+                        <button
+                            onClick={() => { }}
+                            className="border border-body-color hover:bg-primary hover:text-white rounded-lg py-3 px-4">
                             <FontAwesomeIcon icon={faPaperPlane} size="lg" />
                         </button>
                     </div>
