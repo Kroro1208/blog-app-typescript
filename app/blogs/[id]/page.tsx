@@ -7,7 +7,9 @@ interface Params {
 async function extractBlogDetails(id: string) {
     const res = await fetch(`${process.env.URL}/api/blog-post/blog-details?blogID=${id}`, {
         method: 'GET',
-        cache: 'no-store'
+        next: {
+            revalidate: 0
+        }
     });
 
     const data = await res.json();

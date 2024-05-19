@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -15,6 +15,7 @@ const BlogDetailsHome = ({ blogData }: { blogData: Blog }) => {
     const router = useRouter();
 
     async function handleComment() {
+        if (!comment.trim()) return; // 空文字では送信不可
         let extractComments = [...blogData.comments];
         extractComments.push(`${comment}|${session?.user?.name}`)
         const response = await fetch(`/api/blog-post/update-post`, {
@@ -35,6 +36,15 @@ const BlogDetailsHome = ({ blogData }: { blogData: Blog }) => {
             router.refresh();
         }
     }
+
+    useEffect(() => {
+        let interval = setInterval(() => {
+            router.refresh();
+        }, 2000);
+        return () => {
+            clearInterval(interval);
+        }
+    }, []);
 
     if (!blogData) return null;
 
@@ -85,18 +95,26 @@ const BlogDetailsHome = ({ blogData }: { blogData: Blog }) => {
                         </div>
                     </div>
                     <div className="w-full lg:w-8/12 flex gap-4">
-                        <input
-                            id="comment" type="text" name="comment" placeholder="コメントを入力" autoFocus autoComplete="false"
-                            value={comment} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setComment(event.target.value)}
-                            className="w-full rounded-md border border-body-color py-3 px-6 text-base text-body-color
-                     placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none
-                      dark:bg-[#242B51] dark:shadow-signUp"
-                        />
-                        <button
-                            onClick={handleComment}
-                            className="border border-body-color hover:bg-primary hover:text-white rounded-lg py-3 px-4">
-                            <FontAwesomeIcon icon={faPaperPlane} size="lg" />
-                        </button>
+                        {
+                            session !== null ?
+                                <>
+                                    <input
+                                        id="comment" type="text" name="comment" placeholder="コメントを入力" autoFocus autoComplete="false"
+                                        value={comment} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setComment(event.target.value)}
+                                        className="w-full rounded-md border border-body-color py-3 px-6 text-base text-body-color
+                                        placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none
+                                        dark:bg-[#242B51] dark:shadow-signUp"
+                                    />
+                                    <button
+                                        onClick={handleComment}
+                                        disabled={!comment.trim()}
+                                        className="border border-body-color hover:bg-primary hover:text-white rounded-lg py-3 px-4">
+                                        <FontAwesomeIcon icon={faPaperPlane} size="lg" />
+                                    </button>
+                                </>
+                                : null
+                        }
+
                     </div>
                     <section className="dark:bg-gray-900 py-8 lg:py-16 w-full lg:w-8/12">
                         <div className="flex justify-between items-center mb-6">
