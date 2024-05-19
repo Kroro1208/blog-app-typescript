@@ -23,6 +23,7 @@ export default function Home() {
                 すべてのブログ記事をみる
               </Link>
             </div>
+            {/* 全てのブログカードをスライダーで表示させる */}
           </div>
         </div>
       </div>
