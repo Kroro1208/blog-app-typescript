@@ -10,7 +10,7 @@ const SingleBlog = ({ blogItem, handleDelete }: { blogItem: Blog, handleDelete: 
     return (
         <div>
             <div className="relative overflow-hidden rounded-md bg-white shadow-one dark:bg-dark">
-                <Link href={"/"} className="relative block h-[250px] w-full p-3">
+                <Link href={`blogs/${id}`} className="relative block h-[250px] w-full p-3">
                     <span className="absolute top-6 z-20 inline-flex items-center justify-center
                     rounded-full bg-primary py-2 px-4 font-semibold capitalize text-white">
                         {category}
@@ -20,10 +20,10 @@ const SingleBlog = ({ blogItem, handleDelete }: { blogItem: Blog, handleDelete: 
             </div>
             <div className="p-6 sm:p-8 md:py-8 md:px-6 lg:p-8 xl:py-8 xl:px-5 2xl:p-8">
                 <h3>
-                    <Link className="mb-4 text-ellipsis overflow-hidden whitespace-nowrap
+                    <Link href={`blogs/${id}`} className="mb-4 text-ellipsis overflow-hidden whitespace-nowrap
                         block text-xl font-bold text-black hover:text-primary
-                        dark:text-white dark:hover:text-primary sm:text-2xl"
-                        href={"/"}>
+                    dark:text-white dark:hover:text-primary sm:text-2xl"
+                    >
                         {title}
                     </Link>
                 </h3>

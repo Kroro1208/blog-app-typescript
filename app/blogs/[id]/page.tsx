@@ -1,0 +1,27 @@
+import BlogDetailsHome from "@/app/components/blogs/blog-details";
+
+interface Params {
+    id: string;
+};
+
+async function extractBlogDetails(id: string) {
+    const res = await fetch(`${process.env.URL}/api/blog-post/blog-details?blogID=${id}`, {
+        method: 'GET',
+        cache: 'no-store'
+    });
+
+    const data = await res.json();
+
+    if (data.success) return data.data;
+}
+
+export default async function BlogDetails({ params }: { params: Params }) {
+    const { id } = params;
+    const blogData = await extractBlogDetails(id)
+    console.log(blogData)
+    return (
+        <div>
+            <BlogDetailsHome blogData={blogData} />
+        </div>
+    );
+}
