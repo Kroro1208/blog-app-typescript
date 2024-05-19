@@ -5,9 +5,37 @@ import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const BlogDetailsHome = ({ blogData }: { blogData: Blog }) => {
-    console.log(blogData);
+    const [comment, setComment] = useState<string>("");
+    const { data: session } = useSession();
+    const router = useRouter();
+
+    async function handleComment() {
+        let extractComments = [...blogData.comments];
+        extractComments.push(`${comment}|${session?.user?.name}`)
+        const response = await fetch(`/api/blog-post/update-post`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: blogData?.id,
+                comments: extractComments
+            })
+        });
+
+        const data = await response.json();
+
+        if (data && data.success) {
+            setComment('');
+            router.refresh();
+        }
+    }
+
     if (!blogData) return null;
 
     return (
@@ -59,16 +87,47 @@ const BlogDetailsHome = ({ blogData }: { blogData: Blog }) => {
                     <div className="w-full lg:w-8/12 flex gap-4">
                         <input
                             id="comment" type="text" name="comment" placeholder="コメントを入力" autoFocus autoComplete="false"
+                            value={comment} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setComment(event.target.value)}
                             className="w-full rounded-md border border-body-color py-3 px-6 text-base text-body-color
                      placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none
                       dark:bg-[#242B51] dark:shadow-signUp"
                         />
                         <button
-                            onClick={() => { }}
+                            onClick={handleComment}
                             className="border border-body-color hover:bg-primary hover:text-white rounded-lg py-3 px-4">
                             <FontAwesomeIcon icon={faPaperPlane} size="lg" />
                         </button>
                     </div>
+                    <section className="dark:bg-gray-900 py-8 lg:py-16 w-full lg:w-8/12">
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-lg lg:text-2xl font-bold text-black dark:text-white">
+                                コメント数({blogData?.comments.length})
+                            </h2>
+                        </div>
+                        {
+                            (blogData && blogData.comments && blogData.comments.length > 0) ?
+                                blogData.comments.map((comment) => (
+                                    <div className="p-6 text-base rounded-lg dark:bg-gray-900">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <div className="flex items-center">
+                                                <p className="inline-flex items-center mr-3 text-sm text-black dark:text-white font-semibold">
+                                                    {
+                                                        comment.split('|')[1] === blogData?.userId ? `${comment.split('|')[1].split('_')[0]}(Author)`
+                                                            : comment.split('|')[1].split('_')[0]
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p className="text-gra-500 dark:text-gray-400">
+                                                {comment.split('|')[0]}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))
+                                : null
+                        }
+                    </section>
                 </div>
             </div>
         </section>
