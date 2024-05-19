@@ -48,13 +48,15 @@ export default function Header() {
             }
         `}>
             <div className="container">
-                <div className="relative -mx-4 flex items-center justify-between">
-                    <Image src={"icon1.svg"} height={100} width={100} alt="logo" className="hidden md:flex justify-between md:p-5 ml-5" />
-                    <div className="w-60 max-w-full px-4 xl:mr-12">
+                <div className="relative -mx-4 flex gap-2 items-center justify-between">
+                    <Image
+                        className="hidden md:block"
+                        src={"/blog.png"} alt="blog" width={60} height={60} />
+                    <div className="w-80 max-w-full xl:mr-12 flex gap-2">
                         <Link href={'/'} className={`text-[30px] font-extrabold cursor-pointer block w-full
                             ${sticky ? "py-5 lg:py-2" : "py-8"}
                         `}>
-                            Next Blog
+                            Next Tech Blog
                         </Link>
                     </div>
                     <div className="flex w-full items-center justify-between px-4">
